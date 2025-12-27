@@ -1,0 +1,16 @@
+# virtual env
+.venv/
+pyvenv.cfg
+
+# data & logs
+data/
+logs/
+boats.jpg
+
+# model weights
+weights/
+models/weights/
+*.pt
+
+# system
+__pycache__/

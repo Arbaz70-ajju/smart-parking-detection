@@ -1,0 +1,62 @@
+# YOLO OBB Training & Inference Configuration
+
+# ---- MODE SELECTION ----
+task: obb        # oriented bounding box mode
+mode: train      # train / predict
+
+# ---- MODEL AND DATA PATHS ----
+model: models/weights/best.pt   # Base pretrained model
+data: data/data.yaml            # Dataset config file
+
+# ---- TRAINING PARAMETERS ----
+epochs: 100                     # Number of training epochs
+batch: 8                        # Batch size
+imgsz: 1024                     # Image size for training
+device: 0                       # GPU (0) or CPU (-1)
+workers: 8                      # Dataloader workers
+pretrained: true                # Load pretrained weights
+optimizer: auto                 # Let YOLO choose optimizer
+
+# ---- OUTPUT SETTINGS ----
+project: models/predictions     # Parent training folder
+name: parking_detection         # Sub-folder name
+exist_ok: true                  # Avoid errors if folder exists
+
+# ---- VAL/TEST ----
+val: true
+split: val                     # Which split to evaluate
+
+# ---- TRAINING BEHAVIOR ----
+rect: false
+single_cls: false
+amp: true                      # Automatic mixed precision
+resume: false                  # Don’t resume old training
+patience: 30                   # Early stopping
+
+# ---- AUGMENTATION ----
+hsv_h: 0.015
+hsv_s: 0.4
+hsv_v: 0.6
+degrees: 10.0
+translate: 0.2
+scale: 0.5
+fliplr: 0.5
+mosaic: 1.0
+mixup: 0.15
+copy_paste: 0.0
+perspective: 0.0001
+
+# ---- INFERENCE SETTINGS ----
+conf: 0.25                     # Detection threshold
+iou: 0.7                       # NMS threshold
+max_det: 300
+show_conf: true
+show_boxes: true
+save: true
+save_txt: false
+save_crop: false
+save_conf: false
+
+# ---- OUTPUT SAVING ----
+format: torchscript
+save_dir: models/predictions/parking_detection   # Final save dir
